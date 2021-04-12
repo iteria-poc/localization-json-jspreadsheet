@@ -13,13 +13,11 @@ const mapLangToSheetColumns = (languages: LanguagesInput) => {
 };
 
 const setKeys = (languages: LanguagesInput): Array<string> => {
-  let keys: any = [];
   let languagesKeys: Array<string> = [];
   Object.keys(languages).map(
     (titles) => (languagesKeys = [...languagesKeys, titles])
   );
   const keyValue = Object.keys(languages[languagesKeys[0]]);
-  keyValue.map((val) => (keys = [...keys, val]));
   return keyValue;
 };
 
