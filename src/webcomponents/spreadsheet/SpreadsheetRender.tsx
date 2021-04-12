@@ -1,13 +1,18 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { SpreadsheetRenderType } from "../../@types/interfaces";
 
-const SpreadsheetRender: FC<SpreadsheetRenderType> = (props) => {
+const SpreadsheetRender: FC<SpreadsheetRenderType> = ({jRef,addRow,downloadSheet,json}) => {
+  const [showJson,setShowJson] = useState(false)
   return (
     <div>
-      <div ref={props.jRef} />
+      <div ref={jRef} />
       <br />
-      <input type="button" onClick={props.addRow} value="Add new row" />
-      <input type="button" onClick={props.downloadSheet} value="Download" />
+      <input type="button" onClick={addRow} value="Add new row" />
+      <input type="button" onClick={downloadSheet} value="Download" />
+      <input type="button" onClick={() =>( setShowJson(!showJson) )} value="Toggle Json" />
+      <div style={{margin:'10px'}}>
+        {showJson ? json : ''}
+      </div>
     </div>
   );
 };

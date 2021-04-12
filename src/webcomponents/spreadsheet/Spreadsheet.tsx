@@ -1,32 +1,35 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import jspreadsheet from "jspreadsheet-ce";
 import { jsonToCol } from "../helperfunctions/jsonToCol";
 import "../../../node_modules/jspreadsheet-ce/dist/jexcel.css";
 import SpreadsheetRender from "./SpreadsheetRender";
+import { LanguagesInput } from "../../@types/interfaces";
 
-const Spreadsheet = (props: any) => {
-  let json;
+const Spreadsheet = (props: any): any => {
+  const [json, setJson] = useState({});
   const changed = async () => {
-    json = await jRef.current.jexcel.getJson();
+    return setJson(jRef.current.jexcel.getJson());
   };
 
   const onafterchanged = async () => {
-    json = await jRef.current.jexcel.getJson();
+    return setJson(jRef.current.jexcel.getJson());
   };
 
   const oninserted = async () => {
-    json = await jRef.current.jexcel.getJson();
+    return setJson(jRef.current.jexcel.getJson());
   };
   const ondeleted = async () => {
-    json = await jRef.current.jexcel.getJson();
+    return setJson(jRef.current.jexcel.getJson());
   };
 
   let fullRowData = jsonToCol(props.languages);
+  const data = fullRowData.fullRowData;
+  const columns: LanguagesInput = fullRowData.columnTitle;
 
   const jRef: any = useRef(null);
   const options = {
-    data: fullRowData.fullRowData,
-    columns: fullRowData.columnTitle,
+    data: data,
+    columns: columns,
     onchange: changed,
     onafterchanges: onafterchanged,
     oninsertrow: oninserted,
@@ -37,7 +40,7 @@ const Spreadsheet = (props: any) => {
     if (!jRef.current.jspreadsheet) {
       jspreadsheet(jRef.current, options);
     }
-  }, [options]);
+  }, [options, json]);
 
   const addRow = () => {
     jRef.current.jexcel.insertRow();
@@ -52,6 +55,7 @@ const Spreadsheet = (props: any) => {
       jRef={jRef}
       addRow={addRow}
       downloadSheet={downloadSheet}
+      json={JSON.stringify(json)}
     />
   );
 };
