@@ -3,7 +3,7 @@ import jspreadsheet from "jspreadsheet-ce";
 import { jsonToCol } from "../helperfunctions/jsonToCol";
 import "../../../node_modules/jspreadsheet-ce/dist/jexcel.css";
 import SpreadsheetRender from "./SpreadsheetRender";
-import { LanguagesInput } from "../../@types/interfaces";
+import { LanguageMessages } from "../../@types/interfaces";
 
 const Spreadsheet = (props: any): any => {
   const [json, setJson] = useState({});
@@ -23,9 +23,9 @@ const Spreadsheet = (props: any): any => {
   };
 
   let fullRowData = jsonToCol(props.languages);
-  const data = fullRowData.fullRowData;
-  const columns: LanguagesInput = fullRowData.columnTitle;
-
+  const data = fullRowData.columnData;
+  const columns: LanguageMessages = fullRowData.columnTitle;
+  
   const jRef: any = useRef(null);
   const options = {
     data: data,

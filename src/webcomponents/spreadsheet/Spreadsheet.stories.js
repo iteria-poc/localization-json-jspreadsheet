@@ -6,11 +6,12 @@ export default {
   component: Spreadsheet,
 };
 
-
+const twoJsons = {"en": {"budget": "BUDGET", "message2": "MESSAGE2"}, "sk": {"budget": "ROZPOCET", "message2": "hlaska 2"}};
+const threeJson = {"en": {"budget": "BUDGET", "message2": "MESSAGE2"}, "sk": {"budget": "ROZPOCET", "message2": "hlaska 2"},"de":{"budget": "BUDGET", "message2": "Meldung"}}
 
 export const TwoData = () => (
-  <Spreadsheet languages='{"en": {"budget": "BUDGET", "message2": "MESSAGE2"}, "sk": {"budget": "ROZPOCET", "message2": "hlaska 2"}}' />
+  <Spreadsheet languages={twoJsons} />
 );
 export const ThreeData = () => (
-  <Spreadsheet languages='{"en": {"budget": "BUDGET", "message2": "MESSAGE2"}, "sk": {"budget": "ROZPOCET", "message2": "hlaska 2"},"de":{"budget": "BUDGET", "message2": "Meldung"}}' />
+  <Spreadsheet languages={threeJson} />
 );
