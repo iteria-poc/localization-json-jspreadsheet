@@ -1,13 +1,15 @@
 import { JsonToCol, LanguagesInput } from "../../@types/interfaces";
 
 const mapLangToSheetColumns = (languages: LanguagesInput) => {
-  let columnTitle: Array<object> = Object.keys(
-    languages
-  ).map((title: string) => ({ type: "text", title: `${title}`, width: 150 }));
+  let columnTitle: Array<object> = Object.keys(languages).map((title) => ({
+    type: "text",
+    title,
+    width: 150,
+  }));
   return columnTitle;
 };
 
-const setKeys = (languages: LanguagesInput): Array<string> => {
+const setLanguageKeys = (languages: LanguagesInput): Array<string> => {
   const keyValue = new Set();
   const reducer = (accumulator: object, currentValue: object) =>
     keyValue.add(Object.keys(currentValue));
@@ -20,12 +22,10 @@ const setKeys = (languages: LanguagesInput): Array<string> => {
 const mapLangToSheetData = (languages: LanguagesInput) => {
   let rowsData: Array<object> = [];
   let tempCol: Array<object> = [];
-  const tempRows: any = Object.keys(languages).map(
-    (titles) => languages[titles]
-  );
-  Object.keys(setKeys(languages)).map((key: string | any) => {
+  let tempRows: any = Object.keys(languages).map((titles) => languages[titles]);
+  Object.keys(setLanguageKeys(languages)).map((key: string | any) => {
     Object.keys(tempRows).map((row: string | number) => {
-      tempCol = [...tempCol, tempRows[row][setKeys(languages)[key]]];
+      tempCol = [...tempCol, tempRows[row][setLanguageKeys(languages)[key]]];
     });
     rowsData = [...rowsData, tempCol];
     tempCol = [];
