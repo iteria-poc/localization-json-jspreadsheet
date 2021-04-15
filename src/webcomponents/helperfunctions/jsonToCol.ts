@@ -9,32 +9,33 @@ const mapLangToSheetColumns = (languages: LanguagesInput) => {
   return columnTitle;
 };
 
-const setLanguageKeys = (languages: LanguagesInput): Array<string> => {
-  const keyValue = new Set();
-  const reducer = (accumulator: object, currentValue: object) =>
-    keyValue.add(Object.keys(currentValue));
-  Object.keys(languages)
-    .map((titles) => languages[titles])
-    .reduce(reducer);
-  return keyValue.values().next().value;
+const translationOf = (ids: object, keys: object) => {
+  let singleObject: Array<object> = [];
+  Object.values(keys).forEach(
+    (key, i) => {
+      if (key === Object.keys(ids)[i]) {
+        singleObject = [...singleObject,Object.values(ids)[i]];
+      }
+    }
+  );
+  return singleObject;
 };
 
 const mapLangToSheetData = (languages: LanguagesInput) => {
-  let rowsData: Array<object> = [];
-  let tempCol: Array<object> = [];
-  let tempRows: any = Object.keys(languages).map((titles) => languages[titles]);
-  Object.keys(setLanguageKeys(languages)).map((key: string | any) => {
-    Object.keys(tempRows).map((row: string | number) => {
-      tempCol = [...tempCol, tempRows[row][setLanguageKeys(languages)[key]]];
-    });
-    rowsData = [...rowsData, tempCol];
-    tempCol = [];
-  });
-  return rowsData;
+  let messageIDs: Array<object> = Object.keys(languages).map(
+    (titles) => languages[titles]
+  );
+  let firstLangMessageIDs: object = Object.keys(messageIDs[0]);
+  let rows = messageIDs.map(
+    (messageID: object) => translationOf(messageID, firstLangMessageIDs),
+  );
+
+  const rowData = rows[0].map((_, colIndex) => rows.map(row => row[colIndex]));
+  return rowData;
 };
 
 export const jsonToCol = (languages: LanguagesInput): JsonToCol => {
   const columnTitle: Array<object> = mapLangToSheetColumns(languages);
-  const columnData: Array<object> = mapLangToSheetData(languages);
+  const columnData = mapLangToSheetData(languages);
   return { columnData, columnTitle };
 };
