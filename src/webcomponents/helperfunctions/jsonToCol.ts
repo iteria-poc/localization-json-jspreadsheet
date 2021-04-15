@@ -10,27 +10,27 @@ const mapLangToSheetColumns = (languages: LanguagesInput) => {
 };
 
 const translationOf = (ids: object, keys: object) => {
-  let singleObject: Array<object> = [];
-  Object.values(keys).forEach(
-    (key, i) => {
-      if (key === Object.keys(ids)[i]) {
-        singleObject = [...singleObject,Object.values(ids)[i]];
-      }
-    }
-  );
-  return singleObject;
+  return Object.values(keys).map((key, i) => {
+    return Object.values(ids)[i];
+  });
 };
 
 const mapLangToSheetData = (languages: LanguagesInput) => {
   let messageIDs: Array<object> = Object.keys(languages).map(
     (titles) => languages[titles]
   );
+
   let firstLangMessageIDs: object = Object.keys(messageIDs[0]);
-  let rows = messageIDs.map(
-    (messageID: object) => translationOf(messageID, firstLangMessageIDs),
+  let rows = messageIDs.map((messageID: object) =>
+    translationOf(messageID, firstLangMessageIDs)
   );
 
-  const rowData = rows[0].map((_, colIndex) => rows.map(row => row[colIndex]));
+  const rowData = rows[0].map((_, colIndex) =>
+    rows.map((row) => row[colIndex])
+  );
+
+  console.log(JSON.stringify(rowData));
+
   return rowData;
 };
 
