@@ -4,15 +4,11 @@ export interface LanguagesInput {
   [lang: string]: Array<string>;
 }
 
-export interface LanguageMessages {
-  [messageID: string]: any;
-}
-
 export interface SpreadsheetRenderType {
   jRef: React.RefObject<HTMLDivElement>;
   addRow: React.MouseEventHandler<HTMLInputElement>;
   downloadSheet: React.MouseEventHandler<HTMLInputElement>;
-  json: any;
+  json: string;
 }
 
 export interface SpreadsheetType {

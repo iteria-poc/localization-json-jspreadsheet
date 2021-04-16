@@ -17,7 +17,7 @@ const SpreadsheetRender: FC<SpreadsheetRenderType> = ({
       <input
         type="button"
         onClick={() => setShowJson(!showJson)}
-        value="Toggle Json"
+        value="Toggle Json After Change"
       />
       <div style={{ margin: "10px" }}>{showJson ? json : ""}</div>
     </div>
