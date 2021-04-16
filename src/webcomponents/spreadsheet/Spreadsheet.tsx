@@ -25,7 +25,7 @@ const Spreadsheet = (props: any): any => {
   let fullRowData = jsonToCol(props.languages);
   const data = fullRowData.columnData;
   const columns: LanguageMessages = fullRowData.columnTitle;
-  
+
   const jRef: any = useRef(null);
   const options = {
     data: data,

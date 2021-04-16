@@ -9,29 +9,22 @@ const mapLangToSheetColumns = (languages: LanguagesInput) => {
   return columnTitle;
 };
 
-const translationOf = (ids: object, keys: object) => {
-  return Object.values(keys).map((key, i) => {
-    return Object.values(ids)[i];
-  });
-};
-
 const mapLangToSheetData = (languages: LanguagesInput) => {
-  let messageIDs: Array<object> = Object.keys(languages).map(
-    (titles) => languages[titles]
-  );
-
-  let firstLangMessageIDs: object = Object.keys(messageIDs[0]);
+  let messageIDs = Object.keys(languages).map((titles) => languages[titles]);
+  let firstLangMessageIDs = Object.keys(messageIDs[0]);
   let rows = messageIDs.map((messageID: object) =>
-    translationOf(messageID, firstLangMessageIDs)
+    Object.entries(messageID).map((row) => {
+      return `${row[0]}:${row[1]}`;
+    })
   );
-
-  const rowData = rows[0].map((_, colIndex) =>
-    rows.map((row) => row[colIndex])
+  const rearrangedRow = firstLangMessageIDs.map((key: any, colIndex) =>
+    rows.map((row) => {
+      if (row[colIndex].includes(key)) {
+        return row[colIndex].split(":")[1];
+      }
+    })
   );
-
-  console.log(JSON.stringify(rowData));
-
-  return rowData;
+  return rearrangedRow;
 };
 
 export const jsonToCol = (languages: LanguagesInput): JsonToCol => {

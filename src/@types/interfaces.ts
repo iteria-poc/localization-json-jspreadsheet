@@ -1,7 +1,7 @@
 import React from "react";
 
 export interface LanguagesInput {
-  [lang: string]: object;
+  [lang: string]: Array<string>;
 }
 
 export interface LanguageMessages {
