@@ -17,7 +17,7 @@ const mapLangToSheetData = (languages: LanguagesInput) => {
       return `${row[0]}:${row[1]}`;
     })
   );
-  const rearrangedRow = firstLangMessageIDs.map((key: any, colIndex) =>
+  const rearrangedRow = firstLangMessageIDs.map((key, colIndex) =>
     rows.map((row) => {
       if (row[colIndex].includes(key)) {
         return row[colIndex].split(":")[1];
