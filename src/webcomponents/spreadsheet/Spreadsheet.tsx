@@ -1,10 +1,11 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, FC } from "react";
 import jspreadsheet from "jspreadsheet-ce";
 import { jsonToCol } from "../helperfunctions/jsonToCol";
 import "../../../node_modules/jspreadsheet-ce/dist/jexcel.css";
 import SpreadsheetRender from "./SpreadsheetRender";
+import { SpreadsheetType } from "../../@types/interfaces";
 
-const Spreadsheet = (props: any): any => {
+const Spreadsheet: FC<SpreadsheetType> = ({ languages }) => {
   const [json, setJson] = useState({});
   const changed = async () => {
     return setJson(jRef.current.jexcel.getJson());
@@ -21,7 +22,7 @@ const Spreadsheet = (props: any): any => {
     return setJson(jRef.current.jexcel.getJson());
   };
 
-  const fullRowData = jsonToCol(props.languages);
+  const fullRowData = jsonToCol(languages);
   const data = fullRowData.columnData;
   const columns = fullRowData.columnTitle;
 
@@ -33,6 +34,7 @@ const Spreadsheet = (props: any): any => {
     onafterchanges: onafterchanged,
     oninsertrow: oninserted,
     ondeleterow: ondeleted,
+    columnSorting: true,
   };
 
   useEffect(() => {

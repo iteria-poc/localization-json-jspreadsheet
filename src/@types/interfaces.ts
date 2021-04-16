@@ -1,7 +1,7 @@
 import React from "react";
 
 export interface LanguagesInput {
-  [lang: string]: object;
+  [languages: string]: object;
 }
 
 export interface SpreadsheetRenderType {
@@ -12,7 +12,7 @@ export interface SpreadsheetRenderType {
 }
 
 export interface SpreadsheetType {
-  languages: string;
+  languages: { [languages: string]: object };
 }
 
 export interface JsonToCol {
