@@ -21,9 +21,9 @@ const Spreadsheet = (props: any): any => {
     return setJson(jRef.current.jexcel.getJson());
   };
 
-  let fullRowData = jsonToCol(props.languages);
+  const fullRowData = jsonToCol(props.languages);
   const data = fullRowData.columnData;
-  const columns: object = fullRowData.columnTitle;
+  const columns = fullRowData.columnTitle;
 
   const jRef: any = useRef(null);
   const options = {

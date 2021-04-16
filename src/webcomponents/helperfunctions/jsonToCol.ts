@@ -1,7 +1,7 @@
 import { JsonToCol, LanguagesInput } from "../../@types/interfaces";
 
 const mapLangToSheetColumns = (languages: LanguagesInput) => {
-  let columnTitle: Array<object> = Object.keys(languages).map((title) => ({
+  const columnTitle = Object.keys(languages).map((title) => ({
     type: "text",
     title,
     width: 150,
@@ -10,9 +10,9 @@ const mapLangToSheetColumns = (languages: LanguagesInput) => {
 };
 
 const mapLangToSheetData = (languages: LanguagesInput) => {
-  let messageIDs = Object.keys(languages).map((titles) => languages[titles]);
-  let firstLangMessageIDs = Object.keys(messageIDs[0]);
-  let rows = messageIDs.map((messageID: object) =>
+  const messageIDs = Object.keys(languages).map((titles) => languages[titles]);
+  const firstLangMessageIDs = Object.keys(messageIDs[0]);
+  const rows = messageIDs.map((messageID: object) =>
     Object.entries(messageID).map((row) => {
       return `${row[0]}:${row[1]}`;
     })
@@ -28,7 +28,7 @@ const mapLangToSheetData = (languages: LanguagesInput) => {
 };
 
 export const jsonToCol = (languages: LanguagesInput): JsonToCol => {
-  const columnTitle: Array<object> = mapLangToSheetColumns(languages);
+  const columnTitle = mapLangToSheetColumns(languages);
   const columnData = mapLangToSheetData(languages);
   return { columnData, columnTitle };
 };

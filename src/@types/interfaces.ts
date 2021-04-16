@@ -1,7 +1,7 @@
 import React from "react";
 
 export interface LanguagesInput {
-  [lang: string]: Array<string>;
+  [lang: string]: object;
 }
 
 export interface SpreadsheetRenderType {
